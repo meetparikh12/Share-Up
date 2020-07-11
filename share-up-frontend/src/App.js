@@ -10,6 +10,8 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwt_decode from 'jwt-decode';
 import { store } from './store/store';
 import { SET_TOKEN_INFO } from './actions/actionTypes';
+import setFbToken from './utils/setFbToken';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 const theme = createMuiTheme({
   palette: {
@@ -37,12 +39,14 @@ if(token){
       type: SET_TOKEN_INFO,
       payload: {}
     })
-    window.location.href = '/'
+    setFbToken(false);
+    window.location.href = '/login'
   }else {
     store.dispatch({
       type: SET_TOKEN_INFO,
       payload: {exp, user_id, email}
     })
+    setFbToken(token);
   }
 }
 function App() {
@@ -53,7 +57,7 @@ function App() {
             <Navbar/>
             <div className="container">
               <Switch>
-                <Route exact path="/" component={Home}/>
+                <ProtectedRoute exact path="/" component={Home}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
                 <Redirect to="/"/>
