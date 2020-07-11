@@ -7,6 +7,9 @@ import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import {ThemeProvider as MuiThemeProvider}  from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import jwt_decode from 'jwt-decode';
+import { store } from './store/store';
+import { SET_TOKEN_INFO } from './actions/actionTypes';
 
 const theme = createMuiTheme({
   palette: {
@@ -23,7 +26,25 @@ const theme = createMuiTheme({
       contrastText: '#fff'
     }
   }
-})
+});
+const token = localStorage.getItem('FBToken');
+if(token){
+  const decoded_token = jwt_decode(token);
+  const {exp, user_id, email} = decoded_token;
+  if(decoded_token.exp < Date.now()/1000){
+    localStorage.removeItem('FBToken')
+    store.dispatch({
+      type: SET_TOKEN_INFO,
+      payload: {}
+    })
+    window.location.href = '/'
+  }else {
+    store.dispatch({
+      type: SET_TOKEN_INFO,
+      payload: {exp, user_id, email}
+    })
+  }
+}
 function App() {
   return (
       <MuiThemeProvider theme={theme}>

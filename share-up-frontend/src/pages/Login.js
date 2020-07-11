@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, withStyles, Typography, TextField, Button, CircularProgress } from '@material-ui/core';
 import AppIcon from '../images/icon.png';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import setFbToken from '../utils/setFbToken';
+import {connect} from 'react-redux';
+import {setTokenDetails} from '../actions/actions';
 
 const styles = {
     form: {
@@ -30,11 +35,17 @@ const styles = {
     }
 }
 
-function Login({classes, history}) {
+function Login({classes, history, setTokenDetails, tokenDetails}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
+    
+    useEffect(()=> {
+        if(!!(tokenDetails.user_id)){
+            history.push('/')
+        }
+    }, [tokenDetails.user_id])
 
     const formSubmitHandler = event => {
         event.preventDefault();
@@ -42,7 +53,12 @@ function Login({classes, history}) {
         const userData = {email, password}
         axios.post('/user/login', userData)
             .then(res=> {
+                const {token} = res.data;
                 setLoading(false);
+                localStorage.setItem('FBToken', `Bearer ${token}`)
+                setFbToken(token);
+                const {user_id, email, exp} = jwt_decode(token);
+                setTokenDetails({user_id, email, exp});
                 setErrors({});
                 history.push('/')
             })
@@ -64,6 +80,8 @@ function Login({classes, history}) {
                     {errors.message && (<Typography variant="body2" className={classes.customError}>{errors.message}</Typography>)}
                     {loading && (<CircularProgress size={30} className={classes.progress}/>)}
                     {!loading && (<Button disabled={loading} type="submit" variant="contained" color="primary" className={classes.button}>Login</Button>)}
+                    <br/>
+                    <small>Don't have an account yet? Sign Up <Link to="/register">Here</Link>.</small>
                 </form>
             </Grid>
             <Grid item sm/>
@@ -71,4 +89,15 @@ function Login({classes, history}) {
     )
 }
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => {
+    return {
+        tokenDetails: state.user.tokenDetails
+    }
+}
+
+const mapDispatchToProps = dispatchEvent => {
+    return {
+        setTokenDetails : (tokenInfo) => dispatchEvent(setTokenDetails(tokenInfo))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));

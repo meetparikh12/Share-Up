@@ -3,6 +3,10 @@ import { Grid, withStyles, Typography, TextField, Button, CircularProgress } fro
 import AppIcon from '../images/icon.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { setTokenDetails } from '../actions/actions';
+import setFbToken from '../utils/setFbToken';
+import jwt_decode from 'jwt-decode';
+import {connect} from 'react-redux';
 
 const styles = {
     form: {
@@ -31,7 +35,7 @@ const styles = {
     }
 }
 
-function Register({classes, history}) {
+function Register({classes, history, setTokenDetails, tokenDetails}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -39,14 +43,24 @@ function Register({classes, history}) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState({});
 
+    useEffect(() => {
+        if (!!(tokenDetails.user_id)) {
+            history.push('/')
+        }
+    }, [tokenDetails.user_id])
+
     const formSubmitHandler = event => {
         event.preventDefault();
         setLoading(true);
         const userData = {username, email, password, confirmPassword};
         axios.post('/user/signup', userData)
             .then(res=> {
+                const {token} = res.data;
                 setLoading(false);
-                localStorage.setItem('FBToken', `Bearer ${res.data.token}`);
+                localStorage.setItem('FBToken', `Bearer ${token}`)
+                setFbToken(token);
+                const {user_id, email, exp} = jwt_decode(token);
+                setTokenDetails({user_id, email, exp});
                 setErrors({});
                 history.push('/')
             })
@@ -79,4 +93,16 @@ function Register({classes, history}) {
     )
 }
 
-export default withStyles(styles)(Register);
+const mapStateToProps = state => {
+    return {
+        tokenDetails: state.user.tokenDetails
+    }
+}
+
+const mapDispatchToProps = dispatchEvent => {
+    return {
+        setTokenDetails: (tokenInfo) => dispatchEvent(setTokenDetails(tokenInfo))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Register));
