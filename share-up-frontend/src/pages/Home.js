@@ -13,11 +13,13 @@ class Home extends Component {
     }
 
     componentDidMount() {
+
         axios.get('/scream/all')
             .then(res=> {
                 this.setState({screams: res.data.screams})
             })
             .catch(err=> console.log(err))
+        
     }
 
     render(){
@@ -39,4 +41,5 @@ class Home extends Component {
         )
     }
 }
+
 export default Home;

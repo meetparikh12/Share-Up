@@ -7,6 +7,7 @@ import jwt_decode from 'jwt-decode';
 import setFbToken from '../utils/setFbToken';
 import {connect} from 'react-redux';
 import {setTokenDetails} from '../actions/actions';
+import getAuthenticatedUserDetails from '../utils/getAuthenticatedUserDetails';
 
 const styles = {
     form: {
@@ -35,7 +36,7 @@ const styles = {
     }
 }
 
-function Login({classes, history, setTokenDetails, tokenDetails}) {
+function Login({classes, history, setTokenDetails, tokenDetails, getUserData}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -54,6 +55,7 @@ function Login({classes, history, setTokenDetails, tokenDetails}) {
         axios.post('/user/login', userData)
             .then(res=> {
                 const {token} = res.data;
+                getAuthenticatedUserDetails(`Bearer ${token}`);
                 setLoading(false);
                 localStorage.setItem('FBToken', `Bearer ${token}`)
                 setFbToken(token);

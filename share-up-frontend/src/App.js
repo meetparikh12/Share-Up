@@ -9,9 +9,10 @@ import {ThemeProvider as MuiThemeProvider}  from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwt_decode from 'jwt-decode';
 import { store } from './store/store';
-import { SET_TOKEN_INFO } from './actions/actionTypes';
+import { SET_TOKEN_INFO, UNAUTHENTICATE_USER } from './actions/actionTypes';
 import setFbToken from './utils/setFbToken';
 import ProtectedRoute from './utils/ProtectedRoute';
+import getAuthenticatedUserDetails from './utils/getAuthenticatedUserDetails';
 
 const theme = createMuiTheme({
   palette: {
@@ -35,18 +36,19 @@ if(token){
   const {exp, user_id, email} = decoded_token;
   if(decoded_token.exp < Date.now()/1000){
     localStorage.removeItem('FBToken')
+    sessionStorage.removeItem('isReloaded')
     store.dispatch({
-      type: SET_TOKEN_INFO,
-      payload: {}
+      type: UNAUTHENTICATE_USER
     })
     setFbToken(false);
     window.location.href = '/login'
   }else {
+    getAuthenticatedUserDetails(token);
+    setFbToken(token);
     store.dispatch({
       type: SET_TOKEN_INFO,
       payload: {exp, user_id, email}
     })
-    setFbToken(token);
   }
 }
 function App() {

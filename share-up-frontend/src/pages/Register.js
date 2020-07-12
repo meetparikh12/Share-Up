@@ -7,6 +7,7 @@ import { setTokenDetails } from '../actions/actions';
 import setFbToken from '../utils/setFbToken';
 import jwt_decode from 'jwt-decode';
 import {connect} from 'react-redux';
+import getAuthenticatedUserDetails from '../utils/getAuthenticatedUserDetails';
 
 const styles = {
     form: {
@@ -56,6 +57,7 @@ function Register({classes, history, setTokenDetails, tokenDetails}) {
         axios.post('/user/signup', userData)
             .then(res=> {
                 const {token} = res.data;
+                getAuthenticatedUserDetails(`Bearer ${token}`);
                 setLoading(false);
                 localStorage.setItem('FBToken', `Bearer ${token}`)
                 setFbToken(token);

@@ -1,7 +1,8 @@
-import { SET_TOKEN_INFO } from '../actions/actionTypes';
+import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER } from '../actions/actionTypes';
 
 const initialState = {
-    tokenDetails : {}
+    tokenDetails : {},
+    userData: {}
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -12,6 +13,13 @@ export const userReducer = (state = initialState, action) => {
                 tokenDetails: action.payload
             }
     
+        case GET_USER_DATA:
+            return {
+                ...state,
+                userData: action.payload
+            }
+        case UNAUTHENTICATE_USER:
+            return initialState
         default: 
             return state
     }
