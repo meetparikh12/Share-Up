@@ -6,3 +6,5 @@ export const GET_SCREAMS = "GET_SCREAMS";
 
 export const MODIFY_LIKE = "MODIFY_LIKE";
 export const MODIFY_UNLIKE = "MODIFY_UNLIKE";
+
+export const DELETE_SCREAM = "DELETE_SCREAM";

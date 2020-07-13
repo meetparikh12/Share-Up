@@ -1,4 +1,4 @@
-import {SET_TOKEN_INFO, GET_USER_DATA, GET_SCREAMS, MODIFY_LIKE, MODIFY_UNLIKE} from './actionTypes'
+import {SET_TOKEN_INFO, GET_USER_DATA, GET_SCREAMS, MODIFY_LIKE, MODIFY_UNLIKE, DELETE_SCREAM} from './actionTypes'
 
 export const setTokenDetails = tokenInfo => {
     return {
@@ -30,6 +30,12 @@ export const modifyLikesForUser = screamId => {
 export const modifyUnlikeForUser = screamId => {
     return {
         type: MODIFY_UNLIKE,
+        payload: screamId
+    }
+}
+export const deleteScream = screamId => {
+    return {
+        type: DELETE_SCREAM,
         payload: screamId
     }
 }

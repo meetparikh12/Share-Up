@@ -9,11 +9,13 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { modifyLikesForUser, modifyUnlikeForUser } from '../actions/actions';
+import DeleteScream from './DeleteScream';
 
 const styles = {
         card: {
             display: 'flex',
-            marginBottom: 20
+            marginBottom: 20,
+            position: 'relative'
         },
         image: {
             minWidth: 200
@@ -21,12 +23,15 @@ const styles = {
         content: {
             padding: 25,
             objectFit: 'cover'
+        },
+        deleteIcon: {
+            float: 'right'
         }
     }
 
 
 function Scream(props) {
-    const {classes, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
+    const {classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
     const [screamLikeCount, setLikeCount] = useState(likeCount);
     const [screamCommentCount, setCommentCount] = useState(commentCount);
     dayjs.extend(relativeTime);
@@ -48,11 +53,14 @@ function Scream(props) {
             })
             .catch(err=> console.log(err))
     }
+
     return (
         <Card className={classes.card}>
             <CardMedia image={userImage} title="Profile Image" className={classes.image}/>
             <CardContent className={classes.content}>
                 <Typography variant="h5" color="primary" component={Link} to={`/users/${username}`}>{username}</Typography>
+                {credentials.username===username && <DeleteScream screamId={screamId} username={username}/>}
+                
                 <Typography variant="body2" color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>
                 <Typography variant="body1">{body}</Typography>
                 {!!hasUserLikedScream ? <Tooltip title="Unlike">
@@ -79,7 +87,7 @@ function Scream(props) {
 
 const mapStateToProps = state => {
     return {
-        likes: state.user.likes
+        credentials: state.user.credentials
     }
 }
 
