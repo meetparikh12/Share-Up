@@ -55,9 +55,9 @@ function Login({classes, history, setTokenDetails, tokenDetails, getUserData}) {
         axios.post('/user/login', userData)
             .then(res=> {
                 const {token} = res.data;
-                getAuthenticatedUserDetails(`Bearer ${token}`);
+                getAuthenticatedUserDetails(`${token}`);
                 setLoading(false);
-                localStorage.setItem('FBToken', `Bearer ${token}`)
+                localStorage.setItem('FBToken', `${token}`)
                 setFbToken(token);
                 const {user_id, email, exp} = jwt_decode(token);
                 setTokenDetails({user_id, email, exp});

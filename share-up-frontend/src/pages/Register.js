@@ -57,9 +57,9 @@ function Register({classes, history, setTokenDetails, tokenDetails}) {
         axios.post('/user/signup', userData)
             .then(res=> {
                 const {token} = res.data;
-                getAuthenticatedUserDetails(`Bearer ${token}`);
+                getAuthenticatedUserDetails(`${token}`);
                 setLoading(false);
-                localStorage.setItem('FBToken', `Bearer ${token}`)
+                localStorage.setItem('FBToken', `${token}`)
                 setFbToken(token);
                 const {user_id, email, exp} = jwt_decode(token);
                 setTokenDetails({user_id, email, exp});

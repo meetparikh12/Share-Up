@@ -36,7 +36,6 @@ if(token){
   const {exp, user_id, email} = decoded_token;
   if(decoded_token.exp < Date.now()/1000){
     localStorage.removeItem('FBToken')
-    sessionStorage.removeItem('isReloaded')
     store.dispatch({
       type: UNAUTHENTICATE_USER
     })

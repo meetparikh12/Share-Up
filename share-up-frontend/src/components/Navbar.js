@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { store } from '../store/store'
 import { UNAUTHENTICATE_USER } from '../actions/actionTypes'
 import {connect} from 'react-redux';
+import setFbToken from '../utils/setFbToken'
 
 function Navbar({tokenDetails}) {
 
@@ -11,7 +12,7 @@ function Navbar({tokenDetails}) {
         store.dispatch({
             type: UNAUTHENTICATE_USER
         })
-        sessionStorage.removeItem('isReloaded')
+        setFbToken(false);
         localStorage.removeItem('FBToken')
     } 
     return (
