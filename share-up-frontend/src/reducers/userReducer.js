@@ -1,4 +1,4 @@
-import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER } from '../actions/actionTypes';
+import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER, MODIFY_LIKE, MODIFY_UNLIKE } from '../actions/actionTypes';
 
 const initialState = {
     tokenDetails : {},
@@ -24,6 +24,24 @@ export const userReducer = (state = initialState, action) => {
                 notifications: action.payload.notifications,
                 loadingUserDetails: false
             }
+
+        case MODIFY_LIKE: 
+            console.log("Likes");
+            return {
+                ...state,
+                likes: [{
+                    username: state.credentials.username,
+                    screamId: action.payload
+                },...state.likes]
+            }
+
+        case MODIFY_UNLIKE:
+            console.log("Unlike");
+            return {
+                ...state,
+                likes: state.likes.filter(like=> like.screamId !== action.payload)
+            }
+
         case UNAUTHENTICATE_USER:
             return initialState
         default: 
