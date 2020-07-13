@@ -1,4 +1,4 @@
-import {GET_SCREAMS} from '../actions/actionTypes'
+import {GET_SCREAMS, UNAUTHENTICATE_USER} from '../actions/actionTypes'
 
 const initialState = {
     screams: []
@@ -11,6 +11,8 @@ export const screamReducer = (state=initialState, action) => {
                 ...state,
                 screams: action.payload
             }
+        case UNAUTHENTICATE_USER: 
+            return initialState
         default: 
             return state
     }

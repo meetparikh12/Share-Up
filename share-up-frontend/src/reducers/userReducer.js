@@ -26,7 +26,6 @@ export const userReducer = (state = initialState, action) => {
             }
 
         case MODIFY_LIKE: 
-            console.log("Likes");
             return {
                 ...state,
                 likes: [{
@@ -36,7 +35,6 @@ export const userReducer = (state = initialState, action) => {
             }
 
         case MODIFY_UNLIKE:
-            console.log("Unlike");
             return {
                 ...state,
                 likes: state.likes.filter(like=> like.screamId !== action.payload)
