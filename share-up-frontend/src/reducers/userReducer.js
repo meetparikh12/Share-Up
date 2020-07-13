@@ -2,7 +2,10 @@ import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER } from '../actions/a
 
 const initialState = {
     tokenDetails : {},
-    userData: {}
+    credentials: {},
+    likes: [],
+    notifications: [],
+    loadingUserDetails: true
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -16,7 +19,10 @@ export const userReducer = (state = initialState, action) => {
         case GET_USER_DATA:
             return {
                 ...state,
-                userData: action.payload
+                credentials: action.payload.credentials,
+                likes: action.payload.likes,
+                notifications: action.payload.notifications,
+                loadingUserDetails: false
             }
         case UNAUTHENTICATE_USER:
             return initialState
