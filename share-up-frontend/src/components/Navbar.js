@@ -1,27 +1,35 @@
-import React from 'react'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
+import React, { Fragment } from 'react'
+import { AppBar, Toolbar, Button, Tooltip, IconButton } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { store } from '../store/store'
-import { UNAUTHENTICATE_USER } from '../actions/actionTypes'
 import {connect} from 'react-redux';
-import setFbToken from '../utils/setFbToken'
+import AddIcon from '@material-ui/icons/Add'
+import HomeIcon from '@material-ui/icons/Home'
+import Notifications from '@material-ui/icons/Notifications'
 
 function Navbar({tokenDetails}) {
 
-    const logoutHandler = () => {
-        store.dispatch({
-            type: UNAUTHENTICATE_USER
-        })
-        setFbToken(false);
-        localStorage.removeItem('FBToken')
-    } 
     return (
         <AppBar>
             <Toolbar className="nav-container">
-                {tokenDetails.user_id && (<Button color="inherit" component={Link} to="/">Home</Button>)}
-                {!tokenDetails.user_id && (<Button color="inherit" component={Link} to="/login">Login</Button>)}
-                {!tokenDetails.user_id && (<Button color="inherit" component={Link} to="/register">Register</Button>)}
-                {tokenDetails.user_id && (<Button color="inherit" onClick={logoutHandler} component={Link} to="/login">Logout</Button>)}
+                {!tokenDetails.user_id ? 
+                (
+                    <Fragment>
+                        <Button color="inherit" component={Link} to="/login">Login</Button>
+                        <Button color="inherit" component={Link} to="/register">Register</Button>
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <Tooltip title="Post a scream" placement="top">
+                            <IconButton><AddIcon/></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Home" placement="top">
+                            <IconButton><HomeIcon/></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Notifications" placement="top">
+                            <IconButton><Notifications/></IconButton>
+                        </Tooltip>
+                    </Fragment>
+                    )}
             </Toolbar>
         </AppBar>
     )
