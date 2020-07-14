@@ -2,9 +2,9 @@ import React, { Fragment } from 'react'
 import { AppBar, Toolbar, Button, Tooltip, IconButton } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
-import AddIcon from '@material-ui/icons/Add'
 import HomeIcon from '@material-ui/icons/Home'
 import Notifications from '@material-ui/icons/Notifications'
+import PostScream from './PostScream';
 
 function Navbar({tokenDetails}) {
 
@@ -19,9 +19,7 @@ function Navbar({tokenDetails}) {
                     </Fragment>
                 ) : (
                     <Fragment>
-                        <Tooltip title="Post a scream" placement="top">
-                            <IconButton><AddIcon/></IconButton>
-                        </Tooltip>
+                        <PostScream/>
                         <Tooltip title="Home" placement="top">
                             <IconButton><HomeIcon/></IconButton>
                         </Tooltip>

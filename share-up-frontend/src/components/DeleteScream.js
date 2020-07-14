@@ -8,7 +8,7 @@ import { deleteScream } from '../actions/actions';
 const styles={
     deleteButton: {
         position: 'absolute',
-        top: '13px',
+        top: '9%',
         left: '90%'
     }
 }
@@ -37,15 +37,15 @@ function DeleteScream({classes, deleteScream, screamId, username, credentials}) 
     return (
         <Fragment>
             <Tooltip title="Delete scream">
-                    <IconButton  className={classes.deleteButton} onClick={handleOpen}>
-                        <DeleteOutline className={classes.deleteButton} color="secondary"/>
+                    <IconButton className={classes.deleteButton} onClick={handleOpen}>
+                        <DeleteOutline color="secondary"/>
                     </IconButton>
             </Tooltip> 
             <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
                 <DialogTitle>Delete Scream</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Are you sure to delete this scream? This action cannot be undone.
+                        Are you sure you want to delete this scream? This action cannot be undone.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
