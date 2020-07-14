@@ -10,6 +10,7 @@ import { getSingleScream } from '../actions/actions'
 import Favourite from '@material-ui/icons/Favorite';
 import FavouriteBorder from '@material-ui/icons/FavoriteBorder';
 import Chat from '@material-ui/icons/Chat';
+import ScreamComments from './ScreamComments'
 
 const styles = {
     invisibleSeperator: {
@@ -39,9 +40,14 @@ const styles = {
     spinnerDiv: {
         textAlign: 'center',
         margin: '50 0'
+    },
+    visibleSeperator: {
+        width: '100%',
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
+        marginBottom: 20
     }
 }
-function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: {username, likeCount, commentCount, comments, createdAt, body, userImage, }}) {
+function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: {username, comments, createdAt, body, userImage }}) {
     const [open, setIsOpen] = useState(false)
     const [loading, setIsLoading] = useState(false)
 
@@ -68,7 +74,7 @@ function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike,
             <CircularProgress className={classes.progress} thickness={2} size={100}/>
         </div>
     ) : (
-        <Grid container spacing={10}>
+        <Grid container>
             <Grid item sm={5}>
                 <img src={userImage} alt="Profile" className={classes.profileImage}/>
             </Grid> 
@@ -98,6 +104,8 @@ function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike,
                 </Tooltip>
                 <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
             </Grid>
+            <hr className={classes.visibleSeperator}/>
+            <ScreamComments comments={comments}/>
         </Grid>
            )
     return (
