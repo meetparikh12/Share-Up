@@ -9,3 +9,4 @@ export const MODIFY_UNLIKE = "MODIFY_UNLIKE";
 
 export const DELETE_SCREAM = "DELETE_SCREAM";
 export const POST_SCREAM = "POST_SCREAM";
+

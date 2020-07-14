@@ -7,6 +7,9 @@ import dayjs from 'dayjs'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import { getSingleScream } from '../actions/actions'
+import Favourite from '@material-ui/icons/Favorite';
+import FavouriteBorder from '@material-ui/icons/FavoriteBorder';
+import Chat from '@material-ui/icons/Chat';
 
 const styles = {
     invisibleSeperator: {
@@ -28,9 +31,17 @@ const styles = {
     },
     progress: {
         textAlign: 'center'
+    },
+    expandButton: {
+        position: 'absolute',
+        left: '90%'
+    },
+    spinnerDiv: {
+        textAlign: 'center',
+        margin: '50 0'
     }
 }
-function ScreamDialog({classes, screamId, getSingleScream, scream: {username, likeCount, commentCount, comments, createdAt, body, userImage, }}) {
+function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: {username, likeCount, commentCount, comments, createdAt, body, userImage, }}) {
     const [open, setIsOpen] = useState(false)
     const [loading, setIsLoading] = useState(false)
 
@@ -53,7 +64,9 @@ function ScreamDialog({classes, screamId, getSingleScream, scream: {username, li
     }
 
     const dialogMarkup = loading ? (
-        <CircularProgress className={classes.progress} size={50}/>
+        <div className={classes.spinnerDiv}>
+            <CircularProgress className={classes.progress} thickness={2} size={100}/>
+        </div>
     ) : (
         <Grid container spacing={10}>
             <Grid item sm={5}>
@@ -67,13 +80,30 @@ function ScreamDialog({classes, screamId, getSingleScream, scream: {username, li
                 </Typography>    
                 <hr className={classes.invisibleSeperator}/>
                 <Typography variant="body1">{body}</Typography>
+                {!!hasUserLikedScream ? <Tooltip title="Unlike">
+                    <IconButton onClick={() => handleUnlike(screamId)}>
+                        <Favourite color="primary"/>
+                    </IconButton>
+                </Tooltip>: <Tooltip title="Like">
+                    <IconButton onClick={() => handleLike(screamId)}>
+                        <FavouriteBorder color="primary"/>
+                    </IconButton>
+                </Tooltip>
+                }
+                <span>{screamLikeCount} {screamLikeCount > 1 ? "likes" : "like"}</span>
+                <Tooltip title="View Comments">
+                    <IconButton>
+                        <Chat color="primary"/>
+                    </IconButton>
+                </Tooltip>
+                <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
             </Grid>
         </Grid>
            )
     return (
         <Fragment>
             <Tooltip title="More Details">
-                <IconButton onClick={handleOpen}>
+                <IconButton className={classes.expandButton} onClick={handleOpen}>
                     <UnfoldMore color="primary"/>
                 </IconButton>
             </Tooltip>

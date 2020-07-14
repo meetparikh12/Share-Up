@@ -81,7 +81,7 @@ function Scream(props) {
                     </IconButton>
                 </Tooltip>
                 <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
-                <ScreamDialog screamId={screamId}/>
+                <ScreamDialog screamLikeCount={screamLikeCount} screamCommentCount={screamCommentCount} handleLike={()=> handleLike(screamId)} handleUnlike={()=>handleUnlike(screamId)} hasUserLikedScream={hasUserLikedScream} screamId={screamId}/>
             </CardContent>
         </Card>
     )
