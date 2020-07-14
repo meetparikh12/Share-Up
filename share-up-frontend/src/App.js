@@ -13,6 +13,7 @@ import { SET_TOKEN_INFO, UNAUTHENTICATE_USER } from './actions/actionTypes';
 import setFbToken from './utils/setFbToken';
 import ProtectedRoute from './utils/ProtectedRoute';
 import getAuthenticatedUserDetails from './utils/getAuthenticatedUserDetails';
+import User from './pages/User';
 
 const theme = createMuiTheme({
   palette: {
@@ -61,6 +62,7 @@ function App() {
                 <ProtectedRoute exact path="/" component={Home}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
+                <ProtectedRoute path='/user/:username' component={User}/>
                 <Redirect to="/"/>
               </Switch>
             </div>

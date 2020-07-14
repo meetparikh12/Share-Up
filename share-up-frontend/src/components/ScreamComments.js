@@ -39,7 +39,7 @@ function ScreamComments({comments, classes}) {
                                 </Grid>
                                 <Grid item sm={9}>
                                     <div className={classes.commentData}>
-                                        <Typography variant="h5" component={Link} to={`/users/${username}`} color="primary">{username}</Typography>
+                                        <Typography variant="h5" component={Link} to={`/user/${username}`} color="primary">{username}</Typography>
                                         <Typography variant="body2" color="textSecondary">
                                             {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
                                         </Typography>

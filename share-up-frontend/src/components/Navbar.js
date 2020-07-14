@@ -21,7 +21,7 @@ function Navbar({tokenDetails}) {
                     <Fragment>
                         <PostScream/>
                         <Tooltip title="Home" placement="top">
-                            <IconButton><HomeIcon/></IconButton>
+                            <Link to="/"><IconButton><HomeIcon/></IconButton></Link>
                         </Tooltip>
                         <Tooltip title="Notifications" placement="top">
                             <IconButton><Notifications/></IconButton>

@@ -104,7 +104,7 @@ function Profile(props) {
                 </div>
                 <hr/>
                 <div className="profile-details">
-                    <MuiLink component={Link} to={`/users/${username}`} color="primary" variant="h5">@{username}</MuiLink>
+                    <MuiLink component={Link} to={`/user/${username}`} color="primary" variant="h5">@{username}</MuiLink>
                     <hr/>
                     {bio && <Typography variant="body2">{bio}</Typography>}
                     <hr/>

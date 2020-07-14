@@ -80,7 +80,7 @@ function ScreamDialog({classes, handleComment, screamLikeCount, screamCommentCou
                 <img src={userImage} alt="Profile" className={classes.profileImage}/>
             </Grid> 
             <Grid item sm={7}>
-                <Typography component={Link} color="primary" variant="h5" to={`/users/${username}`}>@{username}</Typography>
+                <Typography component={Link} color="primary" variant="h5" to={`/user/${username}`}>@{username}</Typography>
                 <hr className={classes.invisibleSeperator}/>
                 <Typography variant="body2" color="textSecondary">
                     {dayjs(createdAt).format('hh:mm a, MMMM DD YYYY')}

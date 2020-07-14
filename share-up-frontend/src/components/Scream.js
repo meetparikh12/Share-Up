@@ -63,7 +63,7 @@ function Scream(props) {
         <Card className={classes.card}>
             <CardMedia image={userImage} title="Profile Image" className={classes.image}/>
             <CardContent className={classes.content}>
-                <Typography variant="h5" color="primary" component={Link} to={`/users/${username}`}>{username}</Typography>
+                <Typography variant="h5" color="primary" component={Link} to={`/user/${username}`}>{username}</Typography>
                 {credentials.username===username && <DeleteScream screamId={screamId} username={username}/>}
                 
                 <Typography variant="body2" color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>

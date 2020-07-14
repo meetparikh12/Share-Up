@@ -1,4 +1,4 @@
-import {SET_TOKEN_INFO, GET_USER_DATA, GET_SCREAMS, MODIFY_LIKE, MODIFY_UNLIKE, DELETE_SCREAM, POST_SCREAM, GET_SINGLE_SCREAM, ADD_COMMENT_TO_SCREAM} from './actionTypes'
+import {SET_TOKEN_INFO, GET_USER_DATA, GET_SCREAMS, MODIFY_LIKE, MODIFY_UNLIKE, DELETE_SCREAM, POST_SCREAM, GET_SINGLE_SCREAM, ADD_COMMENT_TO_SCREAM, STATIC_USER_PROFILE} from './actionTypes'
 
 export const setTokenDetails = tokenInfo => {
     return {
@@ -58,5 +58,12 @@ export const addCommentToScream = comment => {
     return {
         type: ADD_COMMENT_TO_SCREAM,
         payload: comment
+    }
+}
+
+export const setStaticUserProfile = details => {
+    return {
+        type: STATIC_USER_PROFILE,
+        payload: details
     }
 }
