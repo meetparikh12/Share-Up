@@ -10,6 +10,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import { modifyLikesForUser, modifyUnlikeForUser } from '../actions/actions';
 import DeleteScream from './DeleteScream';
+import ScreamDialog from './ScreamDialog';
 
 const styles = {
         card: {
@@ -80,6 +81,7 @@ function Scream(props) {
                     </IconButton>
                 </Tooltip>
                 <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
+                <ScreamDialog screamId={screamId}/>
             </CardContent>
         </Card>
     )
