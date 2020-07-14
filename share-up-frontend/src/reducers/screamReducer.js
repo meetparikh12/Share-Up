@@ -1,4 +1,4 @@
-import {GET_SCREAMS, UNAUTHENTICATE_USER, DELETE_SCREAM, POST_SCREAM, GET_SINGLE_SCREAM} from '../actions/actionTypes'
+import {GET_SCREAMS, UNAUTHENTICATE_USER, DELETE_SCREAM, POST_SCREAM, GET_SINGLE_SCREAM, ADD_COMMENT_TO_SCREAM} from '../actions/actionTypes'
 
 const initialState = {
     screams: [],
@@ -16,6 +16,14 @@ export const screamReducer = (state=initialState, action) => {
             return {
                 ...state,
                 currentScream: action.payload
+            }
+        case ADD_COMMENT_TO_SCREAM:
+            return {
+                ...state,
+                currentScream: {
+                    ...state.currentScream,
+                    comments: [action.payload, ...state.currentScream.comments]
+                }
             }
         case POST_SCREAM:
             return {

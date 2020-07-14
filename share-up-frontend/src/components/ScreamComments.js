@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { withStyles, Grid, Typography } from '@material-ui/core'
@@ -25,6 +25,7 @@ const styles = {
 }
 
 function ScreamComments({comments, classes}) {
+
     return (
         <Grid container>
             {comments.map((comment, index) => {

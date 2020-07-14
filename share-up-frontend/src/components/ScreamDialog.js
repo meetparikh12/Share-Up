@@ -11,6 +11,7 @@ import Favourite from '@material-ui/icons/Favorite';
 import FavouriteBorder from '@material-ui/icons/FavoriteBorder';
 import Chat from '@material-ui/icons/Chat';
 import ScreamComments from './ScreamComments'
+import CommentForm from './CommentForm'
 
 const styles = {
     invisibleSeperator: {
@@ -47,7 +48,7 @@ const styles = {
         marginBottom: 20
     }
 }
-function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: {username, comments, createdAt, body, userImage }}) {
+function ScreamDialog({classes, handleComment, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: {username, comments, createdAt, body, userImage }}) {
     const [open, setIsOpen] = useState(false)
     const [loading, setIsLoading] = useState(false)
 
@@ -105,6 +106,7 @@ function ScreamDialog({classes, screamLikeCount, screamCommentCount ,handleLike,
                 <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
             </Grid>
             <hr className={classes.visibleSeperator}/>
+            <CommentForm handleComment={handleComment} screamId={screamId}/>
             <ScreamComments comments={comments}/>
         </Grid>
            )

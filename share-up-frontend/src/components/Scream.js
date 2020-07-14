@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withStyles, Card, CardMedia, CardContent, Typography, Tooltip, IconButton } from '@material-ui/core';
 import Favourite from '@material-ui/icons/Favorite';
 import FavouriteBorder from '@material-ui/icons/FavoriteBorder';
@@ -32,11 +32,15 @@ const styles = {
 
 
 function Scream(props) {
-    const {classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
+    const {currentScream: {comments}, classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
     const [screamLikeCount, setLikeCount] = useState(likeCount);
     const [screamCommentCount, setCommentCount] = useState(commentCount);
     dayjs.extend(relativeTime);
     
+    const handleComment = () => {
+        setCommentCount(screamCommentCount+1);
+    }
+
     console.log(hasUserLikedScream);
     const handleLike = (screamId) => {
         axios.get(`/scream/${screamId}/like`)
@@ -75,21 +79,25 @@ function Scream(props) {
                 </Tooltip>
                 }
                 <span>{screamLikeCount} {screamLikeCount > 1 ? "likes" : "like"}</span>
-                <Tooltip title="View Comments">
-                    <IconButton>
-                        <Chat color="primary"/>
-                    </IconButton>
-                </Tooltip>
+                <IconButton>
+                    <Chat color="primary"/>
+                </IconButton>
                 <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
-                <ScreamDialog screamLikeCount={screamLikeCount} screamCommentCount={screamCommentCount} handleLike={()=> handleLike(screamId)} handleUnlike={()=>handleUnlike(screamId)} hasUserLikedScream={hasUserLikedScream} screamId={screamId}/>
+                <ScreamDialog handleComment={handleComment} screamLikeCount={screamLikeCount} 
+                    screamCommentCount={screamCommentCount} handleLike={()=> handleLike(screamId)} 
+                    handleUnlike={()=>handleUnlike(screamId)} hasUserLikedScream={hasUserLikedScream} 
+                    screamId={screamId}/>
             </CardContent>
         </Card>
     )
 }
-
+Scream.defaultProps = {
+    currentScream: { comments: []}
+}
 const mapStateToProps = state => {
     return {
-        credentials: state.user.credentials
+        credentials: state.user.credentials,
+        currentScream: state.user.currentScream
     }
 }
 
