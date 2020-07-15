@@ -36,7 +36,7 @@ const styles = {
     }
 }
 
-function Login({classes, history, setTokenDetails, tokenDetails, getUserData}) {
+function Login({classes, history, setTokenDetails, tokenDetails}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);

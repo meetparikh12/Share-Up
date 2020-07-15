@@ -16,10 +16,10 @@ const getAuthenticatedUserDetails = (token) => {
             type: LOADING_AUTHENTICATE_USER_DETAILS,
             payload: true
         })
-        
+
         axios.get('/user/details', config)
             .then(res => store.dispatch(getUserData(res.data)))
-            .catch(err => console.log(err.response.data)); 
+            .catch(err => console.log(err)); 
     }
 }
 

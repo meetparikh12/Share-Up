@@ -53,7 +53,7 @@ function Notifications({notifications, markNotificationsRead}) {
                 
             return <MenuItem key={notif.createdAt} onClick={handleClose}>
                         {icon} 
-                        <Typography component={Link} to={`/user/${notif.recipient}/scream/${notif.screamId}`} color="default" variant="body1">
+                        <Typography component={Link} to={`/user/${notif.recipient}/scream/${notif.screamId}`} color="textSecondary" variant="body1">
                             {notif.sender} {verb} your scream {time}
                         </Typography>
                     </MenuItem>

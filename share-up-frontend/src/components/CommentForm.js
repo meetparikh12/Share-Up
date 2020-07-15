@@ -45,7 +45,7 @@ function CommentForm({classes, screamId, handleComment ,addCommentToScream}) {
     }
 
     return (
-        <Grid item sm={12} style={{textAlign: 'center'}}>
+        <Grid item sm={12} xs={12} style={{textAlign: 'center'}}>
             <form onSubmit={commentSubmitHandler}>
                 <TextField name="body" type="text" label="Comment on scream" error={errors.comment ? true: false} 
                     helperText={errors.comment} value={body} onChange={(event)=> setBody(event.target.value)} fullWidth 

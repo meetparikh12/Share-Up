@@ -41,7 +41,6 @@ function Scream(props) {
         setCommentCount(screamCommentCount+1);
     }
 
-    console.log(hasUserLikedScream);
     const handleLike = (screamId) => {
         axios.get(`/scream/${screamId}/like`)
             .then(()=> {
