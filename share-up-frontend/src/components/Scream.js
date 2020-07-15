@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { withStyles, Card, CardMedia, CardContent, Typography, Tooltip, IconButton } from '@material-ui/core';
 import Favourite from '@material-ui/icons/Favorite';
 import FavouriteBorder from '@material-ui/icons/FavoriteBorder';
@@ -32,7 +32,7 @@ const styles = {
 
 
 function Scream(props) {
-    const {currentScream: {comments}, classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
+    const {classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
     const [screamLikeCount, setLikeCount] = useState(likeCount);
     const [screamCommentCount, setCommentCount] = useState(commentCount);
     dayjs.extend(relativeTime);

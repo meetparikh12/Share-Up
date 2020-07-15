@@ -11,7 +11,6 @@ function PostScream({classes,postScream}) {
     const [open, setIsOpen] = useState(false);
     const [body,setBody] = useState("");
     const [errors,setErrors] = useState({});
-    const [loading, setIsLoading] = useState(false);
     
     const handleOpen = () => {
         setIsOpen(true)
@@ -19,21 +18,19 @@ function PostScream({classes,postScream}) {
     
     const handleClose = () => {
         setIsOpen(false)
+        setErrors({});
     }
 
     const handleSubmit = () => {
-        setIsLoading(true);
         const data = {body}
         axios.post('/scream', data)
             .then(res=> {
                 postScream(res.data)
                 setErrors({})
                 setBody("")
-                setIsLoading(false)
                 handleClose();
             })
             .catch(err=> {
-                setIsLoading(false)
                 setErrors(err.response.data)
             })
     }

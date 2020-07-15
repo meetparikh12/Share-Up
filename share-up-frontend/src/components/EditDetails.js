@@ -18,7 +18,8 @@ function EditDetails({classes, credentials}) {
     const [bio,setBio] = useState('');
     const [location, setLocation] = useState('');
     const [open, setIsOpen] = useState(false);
-    
+    // const [bioError, setBioError] = useState('');
+    // const [locationError, setLocationError] = useState('');
     useEffect(()=> {
         const {bio, location} = credentials || {bio: '', location: ''};
         setBio(bio);
@@ -32,6 +33,9 @@ function EditDetails({classes, credentials}) {
         setIsOpen(false);
     }
     const handleSubmit = () => {
+        // if(bio.trim().length ===0){
+        //     setBioError('Cannot be empty')
+        // }
         const profileDetails = {bio, location}
         axios.post('/user/details', profileDetails)
             .then(()=> {

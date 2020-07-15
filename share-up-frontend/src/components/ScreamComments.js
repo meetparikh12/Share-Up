@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { withStyles, Grid, Typography } from '@material-ui/core'
@@ -7,6 +7,7 @@ const styles = {
     commentImage : {
         maxWidth: '100%',
         height: 100,
+        width: 100,
         objectFit : 'cover',
         borderRadius: '50%'
     },
