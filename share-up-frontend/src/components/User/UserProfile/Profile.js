@@ -8,12 +8,12 @@ import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import getAuthenticatedUserDetails from '../utils/getAuthenticatedUserDetails';
-import { store } from '../store/store';
-import { UNAUTHENTICATE_USER } from '../actions/actionTypes';
-import setFbToken from '../utils/setFbToken';
-import EditDetails from './EditDetails';
-import ProfileSkeleton from './ProfileSkeleton';
+import getAuthenticatedUserDetails from '../../../utils/SecurityUtils/getAuthenticatedUserDetails';
+import { store } from '../../../store/store';
+import { UNAUTHENTICATE_USER } from '../../../actions/actionTypes';
+import setFbToken from '../../../utils/SecurityUtils/setFbToken';
+import EditDetails from '../UserDetails/EditDetails';
+import ProfileSkeleton from '../../../utils/Skeletons/ProfileSkeleton';
 
 const styles = {
     paper: {

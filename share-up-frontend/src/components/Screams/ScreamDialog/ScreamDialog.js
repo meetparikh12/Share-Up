@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import { getSingleScream } from '../actions/actions'
+import { getSingleScream } from '../../../actions/actions'
 import Favourite from '@material-ui/icons/Favorite';
 import FavouriteBorder from '@material-ui/icons/FavoriteBorder';
 import Chat from '@material-ui/icons/Chat';
-import ScreamComments from './ScreamComments'
-import CommentForm from './CommentForm'
+import ScreamComments from '../ScreamComments/ScreamComments'
+import CommentForm from '../ScreamComments/CommentForm'
 
 const styles = {
     invisibleSeperator: {

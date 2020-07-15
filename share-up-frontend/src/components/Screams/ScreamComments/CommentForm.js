@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Grid, TextField, Button, withStyles, CircularProgress } from '@material-ui/core'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import { addCommentToScream } from '../actions/actions'
+import { addCommentToScream } from '../../../actions/actions'
 
 const styles = {
     visibleSeperator: {

@@ -5,7 +5,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import dayjs from 'dayjs';
 import {connect} from 'react-redux';
-import ProfileSkeleton from './ProfileSkeleton';
+import ProfileSkeleton from '../../../utils/Skeletons/ProfileSkeleton';
 
 const styles = {
     paper: {

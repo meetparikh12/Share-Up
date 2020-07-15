@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import StaticProfile from '../components/StaticProfile';
+import StaticProfile from '../../components/User/UserProfile/StaticProfile';
 import { Grid } from '@material-ui/core';
-import Scream from '../components/Scream';
+import Scream from '../../components/Screams/Scream';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import { getScreams } from '../actions/actions';
-import { store } from '../store/store';
-import { STATIC_USER_PROFILE, LOADING_STATIC_USER_PROFILE, LOADING_SCREAMS } from '../actions/actionTypes';
-import ScreamSkeleton from '../components/ScreamSkeleton';
+import { getScreams } from '../../actions/actions';
+import { store } from '../../store/store';
+import { STATIC_USER_PROFILE, LOADING_STATIC_USER_PROFILE, LOADING_SCREAMS } from '../../actions/actionTypes';
+import ScreamSkeleton from '../../utils/Skeletons/ScreamSkeleton';
 
 class User extends Component {
     constructor(props){

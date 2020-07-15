@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { modifyLikesForUser, modifyUnlikeForUser } from '../actions/actions';
+import { modifyLikesForUser, modifyUnlikeForUser } from '../../actions/actions';
 import DeleteScream from './DeleteScream';
-import ScreamDialog from './ScreamDialog';
+import ScreamDialog from './ScreamDialog/ScreamDialog';
 
 const styles = {
         card: {

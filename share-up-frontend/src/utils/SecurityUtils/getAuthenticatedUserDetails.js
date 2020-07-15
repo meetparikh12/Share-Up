@@ -1,7 +1,7 @@
-import { getUserData } from "../actions/actions";
+import { getUserData } from "../../actions/actions";
 import axios from 'axios';
-import { store } from "../store/store";
-import { LOADING_AUTHENTICATE_USER_DETAILS } from "../actions/actionTypes";
+import { store } from "../../store/store";
+import { LOADING_AUTHENTICATE_USER_DETAILS } from "../../actions/actionTypes";
 
 const getAuthenticatedUserDetails = (token) => {
     if(token){

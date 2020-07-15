@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Grid } from '@material-ui/core'
 import axios from 'axios'
-import Scream from '../components/Scream'
-import Profile from '../components/Profile'
+import Scream from '../../components/Screams/Scream'
+import Profile from '../../components/User/UserProfile/Profile'
 import {connect} from 'react-redux'
-import {getScreams} from '../actions/actions'
-import ScreamSkeleton from '../components/ScreamSkeleton'
-import { LOADING_SCREAMS } from '../actions/actionTypes'
-import { store } from '../store/store'
+import {getScreams} from '../../actions/actions'
+import ScreamSkeleton from '../../utils/Skeletons/ScreamSkeleton'
+import { LOADING_SCREAMS } from '../../actions/actionTypes'
+import { store } from '../../store/store'
 
 class Home extends Component {
     

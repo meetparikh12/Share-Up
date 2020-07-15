@@ -1,6 +1,6 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import NoImg from '../images/no-img.png';
+import NoImg from '../../images/no-img.png';
 import Paper from '@material-ui/core/Paper';
 
 const styles = {

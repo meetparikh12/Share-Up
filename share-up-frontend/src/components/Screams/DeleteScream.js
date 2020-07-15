@@ -3,7 +3,7 @@ import {Tooltip, IconButton, Dialog, DialogTitle, DialogContentText, DialogConte
 import {connect} from 'react-redux';
 import React, { Fragment, useState } from 'react'
 import axios from 'axios';
-import { deleteScream } from '../actions/actions';
+import { deleteScream } from '../../actions/actions';
 
 const styles={
     deleteButton: {

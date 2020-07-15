@@ -3,7 +3,7 @@ import { Tooltip, IconButton, withStyles, Dialog, DialogTitle, DialogContent, Te
 import EditIcon from '@material-ui/icons/Edit';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import getAuthenticatedUserDetails from '../utils/getAuthenticatedUserDetails';
+import getAuthenticatedUserDetails from '../../../utils/SecurityUtils/getAuthenticatedUserDetails';
 
 const styles = {
     button: {

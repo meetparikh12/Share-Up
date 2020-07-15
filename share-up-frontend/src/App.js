@@ -1,19 +1,19 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Redirect, Route} from 'react-router-dom'
 import './App.css';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Navbar from './components/Navbar';
+import Home from './pages/Dashboard/Home';
+import Login from './pages/UserManagement/Login';
+import Register from './pages/UserManagement/Register';
+import Navbar from './components/Layout/Navbar';
 import {ThemeProvider as MuiThemeProvider}  from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwt_decode from 'jwt-decode';
 import { store } from './store/store';
 import { SET_TOKEN_INFO, UNAUTHENTICATE_USER } from './actions/actionTypes';
-import setFbToken from './utils/setFbToken';
-import ProtectedRoute from './utils/ProtectedRoute';
-import getAuthenticatedUserDetails from './utils/getAuthenticatedUserDetails';
-import User from './pages/User';
+import setFbToken from './utils/SecurityUtils/setFbToken';
+import ProtectedRoute from './utils/SecurityUtils/ProtectedRoute';
+import getAuthenticatedUserDetails from './utils/SecurityUtils/getAuthenticatedUserDetails';
+import User from './pages/StaticUserDetails/User';
 
 const theme = createMuiTheme({
   palette: {

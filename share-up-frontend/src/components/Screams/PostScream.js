@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import AddIcon from '@material-ui/icons/Add'
 import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, withStyles, Tooltip, IconButton } from '@material-ui/core'
 import axios from 'axios'
-import { postScream } from '../actions/actions';
+import { postScream } from '../../actions/actions';
 import {connect} from 'react-redux';
 
 const styles = {};

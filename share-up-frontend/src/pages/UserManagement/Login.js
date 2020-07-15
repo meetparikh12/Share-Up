@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, withStyles, Typography, TextField, Button, CircularProgress } from '@material-ui/core';
-import AppIcon from '../images/icon.png';
+import AppIcon from '../../images/icon.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import setFbToken from '../utils/setFbToken';
+import setFbToken from '../../utils/SecurityUtils/setFbToken';
 import {connect} from 'react-redux';
-import {setTokenDetails} from '../actions/actions';
-import getAuthenticatedUserDetails from '../utils/getAuthenticatedUserDetails';
+import {setTokenDetails} from '../../actions/actions';
+import getAuthenticatedUserDetails from '../../utils/SecurityUtils/getAuthenticatedUserDetails';
 
 const styles = {
     form: {

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import {connect} from 'react-redux'
-import { markNotificationsRead } from '../actions/actions'
+import { markNotificationsRead } from '../../../actions/actions'
 import axios from 'axios'
 import { Tooltip, IconButton, Menu, Badge, MenuItem, Typography } from '@material-ui/core'
 import NotificationIcon from '@material-ui/icons/Notifications'

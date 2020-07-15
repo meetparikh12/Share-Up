@@ -3,8 +3,8 @@ import { AppBar, Toolbar, Button, Tooltip, IconButton } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home'
-import PostScream from './PostScream';
-import Notifications from './Notifications';
+import PostScream from '../Screams/PostScream';
+import Notifications from '../User/UserNotifications/Notifications';
 function Navbar({tokenDetails}) {
 
     return (
