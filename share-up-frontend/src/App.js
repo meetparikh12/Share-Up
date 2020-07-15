@@ -14,6 +14,9 @@ import setFbToken from './utils/SecurityUtils/setFbToken';
 import ProtectedRoute from './utils/SecurityUtils/ProtectedRoute';
 import getAuthenticatedUserDetails from './utils/SecurityUtils/getAuthenticatedUserDetails';
 import User from './pages/StaticUserDetails/User';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://us-central1-shareup-1202.cloudfunctions.net/api'
 
 const theme = createMuiTheme({
   palette: {
