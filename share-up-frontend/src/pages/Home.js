@@ -5,11 +5,17 @@ import Scream from '../components/Scream'
 import Profile from '../components/Profile'
 import {connect} from 'react-redux'
 import {getScreams} from '../actions/actions'
+import ScreamSkeleton from '../components/ScreamSkeleton'
+import { LOADING_SCREAMS } from '../actions/actionTypes'
+import { store } from '../store/store'
 
 class Home extends Component {
     
     componentDidMount() {
-
+        store.dispatch({
+            type: LOADING_SCREAMS,
+            payload: true
+        })
         axios.get('/scream/all')
             .then(res=> {
                 this.props.getScreams(res.data.screams);
@@ -20,7 +26,7 @@ class Home extends Component {
 
     render(){
         
-        let screamForMarkUp = this.props.screams ? (
+        let screamForMarkUp = !this.props.loadingScreams ? (
             this.props.screams.map(scream=> {
                 let hasUserLikedScream;
                 if (this.props.likes.length > 0) {
@@ -28,7 +34,7 @@ class Home extends Component {
                 }
                 return <Scream key={scream.screamId} hasUserLikedScream={hasUserLikedScream} scream={scream}/>
             })
-        ) : <p>Loading...</p>
+        ): <ScreamSkeleton/>
 
         return (
             <Grid container spacing={4}>
@@ -46,7 +52,8 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         screams: state.scream.screams,
-        likes: state.user.likes
+        likes: state.user.likes,
+        loadingScreams: state.scream.loadingScreams
     }
 }
 const mapDispatchToProps = dispatchEvent => {

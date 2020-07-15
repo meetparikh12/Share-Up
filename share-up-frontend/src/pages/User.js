@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import { getScreams } from '../actions/actions';
 import { store } from '../store/store';
-import { STATIC_USER_PROFILE, LOADING_STATIC_USER_PROFILE } from '../actions/actionTypes';
+import { STATIC_USER_PROFILE, LOADING_STATIC_USER_PROFILE, LOADING_SCREAMS } from '../actions/actionTypes';
+import ScreamSkeleton from '../components/ScreamSkeleton';
 
 class User extends Component {
     constructor(props){
@@ -24,7 +25,11 @@ class User extends Component {
             type: LOADING_STATIC_USER_PROFILE,
             payload: true
         })
-        
+        store.dispatch({
+            type: LOADING_SCREAMS,
+            payload: true
+        })
+
         axios.get(`/user/details/${username}`)
             .then(res => {
                 this.props.getScreams(res.data.screams);
@@ -32,7 +37,6 @@ class User extends Component {
                     type: STATIC_USER_PROFILE,
                     payload: res.data.user
                 })
-
             })
             .catch(err => {
                 console.log(err);
@@ -42,8 +46,8 @@ class User extends Component {
 
     render(){
         const {screamIdParam} = this.state;
-        let screamForMarkUp = !this.props.screams ? 
-            <p>Loading...</p> : 
+        let screamForMarkUp = this.props.loadingScreams ? 
+            <ScreamSkeleton/> : 
             (this.props.screams.length>0 ? (!screamIdParam ? 
                 (this.props.screams.map(scream=> {
                     let hasUserLikedScream;
@@ -82,7 +86,8 @@ class User extends Component {
 const mapStateToProps = state => {
     return {
         screams: state.scream.screams,
-        likes: state.user.likes
+        likes: state.user.likes,
+        loadingScreams: state.scream.loadingScreams
     }
 }
 const mapDispatchToProps = dispatchEvent => {
