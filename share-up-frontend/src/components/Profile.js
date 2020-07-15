@@ -13,6 +13,7 @@ import { store } from '../store/store';
 import { UNAUTHENTICATE_USER } from '../actions/actionTypes';
 import setFbToken from '../utils/setFbToken';
 import EditDetails from './EditDetails';
+import ProfileSkeleton from './ProfileSkeleton';
 
 const styles = {
     paper: {
@@ -123,7 +124,7 @@ function Profile(props) {
                 <EditDetails/>
             </div>
         </Paper>
-    ) : (<p>Loading...</p>)
+    ) : (<ProfileSkeleton/>)
     return profileMarkUp;
 }
 
