@@ -3,9 +3,8 @@ import { AppBar, Toolbar, Button, Tooltip, IconButton } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home'
-import Notifications from '@material-ui/icons/Notifications'
 import PostScream from './PostScream';
-
+import Notifications from './Notifications';
 function Navbar({tokenDetails}) {
 
     return (
@@ -23,9 +22,7 @@ function Navbar({tokenDetails}) {
                         <Tooltip title="Home" placement="top">
                             <Link to="/"><IconButton><HomeIcon/></IconButton></Link>
                         </Tooltip>
-                        <Tooltip title="Notifications" placement="top">
-                            <IconButton><Notifications/></IconButton>
-                        </Tooltip>
+                        <Notifications/>
                     </Fragment>
                     )}
             </Toolbar>

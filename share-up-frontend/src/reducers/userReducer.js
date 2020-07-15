@@ -1,4 +1,4 @@
-import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER, MODIFY_LIKE, MODIFY_UNLIKE, STATIC_USER_PROFILE } from '../actions/actionTypes';
+import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER, MODIFY_LIKE, MODIFY_UNLIKE, STATIC_USER_PROFILE, MARK_NOTIFICATIONS_READ } from '../actions/actionTypes';
 
 const initialState = {
     tokenDetails : {},
@@ -31,6 +31,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 staticUserProfile: action.payload
             }
+
         case MODIFY_LIKE: 
             return {
                 ...state,
@@ -46,8 +47,15 @@ export const userReducer = (state = initialState, action) => {
                 likes: state.likes.filter(like=> like.screamId !== action.payload)
             }
 
+        case MARK_NOTIFICATIONS_READ:
+            state.notifications.forEach((notif=> notif.read = true))
+            return {
+                ...state
+            }
+
         case UNAUTHENTICATE_USER:
             return initialState
+
         default: 
             return state
     }
