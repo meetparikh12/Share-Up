@@ -5,6 +5,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import dayjs from 'dayjs';
 import {connect} from 'react-redux';
+import ProfileSkeleton from './ProfileSkeleton';
 
 const styles = {
     paper: {
@@ -39,9 +40,9 @@ const styles = {
     }
 }
 
-function StaticProfile({classes, staticUserProfile: {username, createdAt, location, bio, imageUrl}}) {
+function StaticProfile({classes, loadingStaticUserProfile, staticUserProfile: {username, createdAt, location, bio, imageUrl}}, props) {
     
-    let profileMarkUp =  (
+    let profileMarkUp =  loadingStaticUserProfile ? <ProfileSkeleton/> : (
         <Paper className={classes.paper}>
             <div className={classes.profile}>
                 <div className="image-wrapper">
@@ -67,19 +68,10 @@ function StaticProfile({classes, staticUserProfile: {username, createdAt, locati
     return profileMarkUp;
 }
 
-StaticProfile.defaultProps = {
-    staticUserProfile: {
-        username: '',
-        createdAt: '',
-        bio: '',
-        location: '',
-        imageUrl: ''
-    }
-}
-
 const mapStateToProps = state => {
     return {
-        staticUserProfile: state.user.staticUserProfile
+        staticUserProfile: state.user.staticUserProfile,
+        loadingStaticUserProfile: state.user.loadingStaticUserProfile
     }
 }
 

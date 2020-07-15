@@ -1,11 +1,13 @@
-import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER, MODIFY_LIKE, MODIFY_UNLIKE, STATIC_USER_PROFILE, MARK_NOTIFICATIONS_READ } from '../actions/actionTypes';
+import { SET_TOKEN_INFO, GET_USER_DATA, UNAUTHENTICATE_USER, MODIFY_LIKE, MODIFY_UNLIKE, STATIC_USER_PROFILE, MARK_NOTIFICATIONS_READ, LOADING_STATIC_USER_PROFILE, LOADING_AUTHENTICATE_USER_DETAILS } from '../actions/actionTypes';
+import { store } from '../store/store';
 
 const initialState = {
     tokenDetails : {},
     credentials: {},
     likes: [],
     notifications: [],
-    loadingUserDetails: true,
+    loadingUserDetails: false,
+    loadingStaticUserProfile: false,
     staticUserProfile: {}
 }
 
@@ -26,10 +28,23 @@ export const userReducer = (state = initialState, action) => {
                 loadingUserDetails: false
             }
 
+        case LOADING_AUTHENTICATE_USER_DETAILS:
+            return {
+                ...state,
+                loadingUserDetails: true
+            }
+            
         case STATIC_USER_PROFILE: 
             return {
                 ...state,
-                staticUserProfile: action.payload
+                staticUserProfile: action.payload,
+                loadingStaticUserProfile: false
+            }
+
+        case LOADING_STATIC_USER_PROFILE:
+            return {
+                ...state,
+                loadingStaticUserProfile: true
             }
 
         case MODIFY_LIKE: 

@@ -2,7 +2,6 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import NoImg from '../images/no-img.png';
 import Paper from '@material-ui/core/Paper';
-import CalendarToday from '@material-ui/icons/CalendarToday';
 
 const styles = {
     paper: {

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import { getScreams } from '../actions/actions';
 import { store } from '../store/store';
-import { STATIC_USER_PROFILE } from '../actions/actionTypes';
+import { STATIC_USER_PROFILE, LOADING_STATIC_USER_PROFILE } from '../actions/actionTypes';
 
 class User extends Component {
     constructor(props){
@@ -20,7 +20,11 @@ class User extends Component {
         if(screamId){
             this.setState({screamIdParam: screamId})
         }
-
+        store.dispatch({
+            type: LOADING_STATIC_USER_PROFILE,
+            payload: true
+        })
+        
         axios.get(`/user/details/${username}`)
             .then(res => {
                 this.props.getScreams(res.data.screams);
