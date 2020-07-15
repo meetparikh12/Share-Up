@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Tooltip, IconButton, Dialog, CircularProgress, DialogContent, Grid, Typography, withStyles } from '@material-ui/core'
 import UnfoldMore from '@material-ui/icons/UnfoldMore'
 import CloseIcon from '@material-ui/icons/Close'
@@ -49,11 +49,25 @@ const styles = {
         marginBottom: 20
     }
 }
-function ScreamDialog({classes, handleComment, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: {username, comments, createdAt, body, userImage }}) {
+function ScreamDialog({openDialog, username, classes, handleComment, screamLikeCount, screamCommentCount ,handleLike, handleUnlike, hasUserLikedScream ,screamId, getSingleScream, scream: { comments, createdAt, body, userImage }}) {
     const [open, setIsOpen] = useState(false)
     const [loading, setIsLoading] = useState(false)
-
+    const [olderPath, setOldPath] = useState('')
+    
+    useEffect(() => {
+        if(openDialog){
+            handleOpen();
+        }
+    }, [openDialog])
+    
     const handleOpen = () => {
+        let oldPath = window.location.pathname;
+        const newPath = `/user/${username}/scream/${screamId}`
+        if(oldPath===newPath){
+            oldPath=`/user/${username}`
+        }
+        window.history.pushState(null,null,newPath);
+        setOldPath(oldPath);
         setIsOpen(true)
         setIsLoading(true);
         axios.get(`/scream/${screamId}`)
@@ -68,6 +82,7 @@ function ScreamDialog({classes, handleComment, screamLikeCount, screamCommentCou
     }
 
     const handleClose = () => {
+        window.history.pushState(null,null,olderPath);
         setIsOpen(false)
     }
 

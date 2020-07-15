@@ -9,9 +9,18 @@ import { store } from '../store/store';
 import { STATIC_USER_PROFILE } from '../actions/actionTypes';
 
 class User extends Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            screamIdParam: null
+        }
+    }
     componentDidMount() {
-        const {username} = this.props.match.params;
+        const {username, screamId} = this.props.match.params;
+        if(screamId){
+            this.setState({screamIdParam: screamId})
+        }
+
         axios.get(`/user/details/${username}`)
             .then(res => {
                 this.props.getScreams(res.data.screams);
@@ -28,19 +37,30 @@ class User extends Component {
     }
 
     render(){
-        let screamForMarkUp = this.props.screams ? 
-            this.props.screams.length>0 ? 
-                this.props.screams.map(scream=> {
+        const {screamIdParam} = this.state;
+        let screamForMarkUp = !this.props.screams ? 
+            <p>Loading...</p> : 
+            (this.props.screams.length>0 ? (!screamIdParam ? 
+                (this.props.screams.map(scream=> {
                     let hasUserLikedScream;
                     if (this.props.likes.length > 0) {
                         hasUserLikedScream = this.props.likes.find(like => like.screamId === scream.screamId)
                     }
                     return <Scream key={scream.screamId} hasUserLikedScream={hasUserLikedScream} scream={scream}/>
+                })) : 
+                this.props.screams.map(scream=> {
+                    let hasUserLikedScream;
+                    if (this.props.likes.length > 0) {
+                        hasUserLikedScream = this.props.likes.find(like => like.screamId === scream.screamId)
+                    }
+                    if(scream.screamId !== screamIdParam){
+                        return <Scream key={scream.screamId} hasUserLikedScream={hasUserLikedScream} scream={scream}/>
+                    }else return <Scream key={scream.screamId} hasUserLikedScream={hasUserLikedScream} scream={scream} openDialog/>
                 })
+                )
             :
-            <p>No screams found</p>
-            : 
-            <p>Loading...</p>
+            <p>No screams found</p>)
+           
 
         return (
             <Grid container spacing={4}>

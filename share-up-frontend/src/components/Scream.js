@@ -32,7 +32,7 @@ const styles = {
 
 
 function Scream(props) {
-    const {classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream} = props;
+    const {classes, credentials, scream : {body, createdAt, likeCount, commentCount, userImage, username, screamId}, hasUserLikedScream, openDialog} = props;
     const [screamLikeCount, setLikeCount] = useState(likeCount);
     const [screamCommentCount, setCommentCount] = useState(commentCount);
     dayjs.extend(relativeTime);
@@ -83,7 +83,7 @@ function Scream(props) {
                     <Chat color="primary"/>
                 </IconButton>
                 <span>{screamCommentCount} {screamCommentCount > 1 ? "comments" : "comment"}</span>
-                <ScreamDialog handleComment={handleComment} screamLikeCount={screamLikeCount} 
+                <ScreamDialog username={username} openDialog={openDialog} handleComment={handleComment} screamLikeCount={screamLikeCount} 
                     screamCommentCount={screamCommentCount} handleLike={()=> handleLike(screamId)} 
                     handleUnlike={()=>handleUnlike(screamId)} hasUserLikedScream={hasUserLikedScream} 
                     screamId={screamId}/>

@@ -1,15 +1,6 @@
 import React from 'react'
-import {
-    withStyles,
-    Paper,
-    Typography
-} from '@material-ui/core';
-import {
-    Link as MuiLink
-} from '@material-ui/core';
-import {
-    Link
-} from 'react-router-dom';
+import {withStyles,Paper,Typography} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import LocationOn from '@material-ui/icons/LocationOn';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import dayjs from 'dayjs';
@@ -58,7 +49,7 @@ function StaticProfile({classes, staticUserProfile: {username, createdAt, locati
                 </div>
                 <hr/>
                 <div className="profile-details">
-                    <MuiLink component={Link} to={`/user/${username}`} color="primary" variant="h5">@{username}</MuiLink>
+                    <Typography component={Link} to={`/user/${username}`} color="primary" variant="h5">@{username}</Typography>
                     <hr/>
                     {bio && <Typography variant="body2">{bio}</Typography>}
                     <hr/>

@@ -62,7 +62,8 @@ function App() {
                 <ProtectedRoute exact path="/" component={Home}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
-                <ProtectedRoute path='/user/:username' component={User}/>
+                <ProtectedRoute exact path='/user/:username' component={User}/>
+                <ProtectedRoute exact path='/user/:username/scream/:screamId' component={User}/>
                 <Redirect to="/"/>
               </Switch>
             </div>
