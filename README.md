@@ -1,5 +1,5 @@
 # Share-Up
-Share-Up is a social-media based web-app developed using React, Node and Firebase for users to share "What's on your mind?" and user once logged in, can perfom several actions like checking out other users and their screams/posts, edit their own profile, like/unlike and comment on screams/posts as well as check his/her own notifications.
+Share-Up is a social-media based web-app developed using React, Node and Firebase for users to share *What's on your mind?* and user once logged in, can perfom several actions like checking out other users and their screams/posts, edit their own profile, like/unlike and comment on screams/posts as well as check his/her own notifications.
 
 Modules covered are:
 
